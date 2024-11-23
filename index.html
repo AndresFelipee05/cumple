@@ -16,7 +16,7 @@
 <body>
 <script>
 let scale = 0; // Escala inicial del corazón
-const maxScale = 20; // Tamaño máximo cuando se detiene el crecimiento
+let maxScale; // Tamaño máximo cuando se detiene el crecimiento
 let isPulsing = false; // Indica si el corazón ya está palpitarndo
 let pulseFactor = 0; // Factor para controlar el pulso
 
@@ -26,6 +26,9 @@ function setup() {
     textSize(32); // Tamaño del texto
     textAlign(CENTER, CENTER); // Alineación del texto en el centro
     fill(255); // Color del texto (blanco)
+    
+    // Calcular un tamaño máximo adecuado basado en el tamaño de la pantalla
+    maxScale = min(windowWidth, windowHeight) * 0.3; // Max escala es el 30% del tamaño menor de la ventana
 }
 
 function draw() {
@@ -73,6 +76,7 @@ function draw() {
 // Ajustar el tamaño del lienzo cuando la ventana cambie de tamaño (en móviles)
 window.addEventListener('resize', () => {
     resizeCanvas(windowWidth, windowHeight);
+    maxScale = min(windowWidth, windowHeight) * 0.3; // Recalcular el tamaño máximo del corazón al redimensionar
 });
 </script>
 </body>
