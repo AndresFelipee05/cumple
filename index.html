@@ -33,16 +33,17 @@ function draw() {
     stroke(255, 0, 0); // Color rojo
     strokeWeight(2); // Grosor de las líneas
 
-    translate(width / 2, height / 2); // Centrar el corazón
+    // Asegurarse de que el corazón esté centrado en la pantalla
+    translate(width / 2, height / 2);
 
     // Si no está palpitarndo, crece hasta el tamaño máximo
     if (!isPulsing) {
-        scale += 0.2; // Incrementa el tamaño gradualmente (ajustable)
+        scale += 0.1; // Reducir el incremento para que crezca lentamente
     }
 
     // Dibujar el corazón
     let currentScale = scale;
-    
+
     // Si está pulsando, hacer que palpite
     if (isPulsing) {
         pulseFactor = sin(frameCount * 0.1) * 0.7; // Ajusta la velocidad y amplitud del pulso
@@ -62,9 +63,17 @@ function draw() {
 
     // Mostrar el texto después de que el corazón comience a palpitar
     if (isPulsing) {
-        text("Feliz cumpleaños, te quiero Celines❤️", 0, maxScale + 360); // Muestra el texto debajo del corazón
+        // Ajustar la posición del texto según la altura de la pantalla
+        let textPositionY = maxScale + 50; // Ajustar la distancia al corazón
+        textSize(24); // Tamaño de texto reducido para pantallas pequeñas
+        text("Feliz cumpleaños, te quiero Celines❤️", 0, textPositionY); // Muestra el texto debajo del corazón
     }
 }
+
+// Ajustar el tamaño del lienzo cuando la ventana cambie de tamaño (en móviles)
+window.addEventListener('resize', () => {
+    resizeCanvas(windowWidth, windowHeight);
+});
 </script>
 </body>
 </html>
